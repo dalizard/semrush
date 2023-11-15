@@ -10,7 +10,7 @@ module Semrush
     DBS = [:us, :uk, :ca, :ru, :de, :fr, :es, :it, :br, :au, :ar, :be, :ch, :dk, :fi, :hk, :ie, :il, :mx, :nl, :no, :pl, :se, :sg, :tr, :in, :nz] #"us" - for Google.com, "uk" - for Google.co.uk, "ru" - for Google.ru, "de" for Google.de, "fr" for Google.fr, "es" for Google.es, "it" for Google.it Beta, "br" for Google.com.br Beta, "au" for Google.com.au Beta, etc
     REPORT_TYPES = [:domain_rank, :domain_organic, :domain_adwords, :domain_organic_organic, :domain_adwords_adwords, :domain_organic_adwords, :domain_adwords_organic, :domain_adwords_historical,
                     :phrase_this, :phrase_organic, :phrase_related, :phrase_adwords_historical, :phrase_fullsearch, :phrase_kdi,
-                    :url_organic, :url_adwords]
+                    :url_organic, :url_adwords, :domain_domains]
     REQUEST_TYPES = [:domain, :phrase, :url]
 
     # Tries to make the api call for the report called as method (see samples on http://www.semrush.com/api.html).
@@ -234,6 +234,10 @@ module Semrush
     # * Ad - Keywords that this site has in TOP20 Google AdWords
     def competitors_adwords_by_organic params = {}
       request(params.merge(:report_type => :domain_adwords_organic))
+    end
+
+    def domain_domains(params = {})
+      request(params.merge(report_type: :domain_domains))
     end
 
     # Ads history for domain or phrase
