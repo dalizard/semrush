@@ -16,6 +16,9 @@ module Semrush
           temp_url.gsub!("%#{k.to_s.upcase}%", CGI.escape(v.to_s).gsub('&', '%26'))
         end
       }
+      if @parameters[:report_type] == :domain_domains
+        temp_url.gsub!("domain=%REQUEST%", "domains=#{@parameters[:domains]}")
+      end
       puts "[Semrush query] URL: #{temp_url}" if Semrush.debug
       url = URI.parse(temp_url)
       Semrush.before.call(@parameters.merge(:url => url))
